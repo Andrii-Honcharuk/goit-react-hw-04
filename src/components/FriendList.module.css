@@ -1,0 +1,21 @@
+.container {
+  margin-top: 24px;
+  border-top: 2px solid grey;
+}
+
+.title {
+  text-align: center;
+}
+.list {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.listItem {
+  width: calc(100% / 5);
+  max-width: 100px;
+  border: 2px solid black;
+  border-radius: 16px;
+}

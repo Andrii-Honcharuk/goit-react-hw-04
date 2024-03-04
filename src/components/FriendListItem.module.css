@@ -1,0 +1,27 @@
+.cardContainer {
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.friendAvatar {
+  margin-top: 24px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.name {
+  font-size: 24px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.online {
+  color: green;
+  font-weight: 600;
+}
+.offline {
+  color: red;
+  font-weight: 600;
+}
