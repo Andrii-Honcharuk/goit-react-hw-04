@@ -27,8 +27,6 @@ export default function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const loadMoreRef = useRef();
 
-
-
   useEffect(() => {
     if (query === "") {
       return;
@@ -43,6 +41,7 @@ export default function App() {
         console.log(data.total_pages > page);
         console.log(page, " of ", data.total_pages);
         setPhotos((prevPhotos) => {
+          console.log("photos");
           return [...prevPhotos, ...data.results];
         });
         data.results.length === 0 ? setNoResults(true) : setNoResults(false);
@@ -55,6 +54,21 @@ export default function App() {
     getPhotosData();
   }, [query, page]);
 
+  useEffect(() => {
+    if (page === 1) {
+      return;
+    }
+    if (photos.length > 0) {
+      let dims = loadMoreRef.current.getBoundingClientRect();
+      console.log("dims", dims);
+      window.scrollTo({
+        top: -1 * dims.height,
+        behavior: "smooth",
+      });
+      console.log("scroll");
+    }
+  }, [photos, page]);
+
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
     setPage(1);
@@ -63,13 +77,6 @@ export default function App() {
 
   const handleLoadMore = () => {
     setPage(page + 1);
-
-    let dims = loadMoreRef.current.getBoundingClientRect();
-    console.log("dims", dims.height);
-    window.scrollTo({
-      top: dims.height,
-      behavior: "smooth",
-    });
   };
 
   function openModal(imageData) {

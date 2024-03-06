@@ -3,8 +3,6 @@
 import css from "./ImageCard.module.css";
 
 export default function ImageCard({ image, onClick }) {
-  console.log("onClick prop in ImageCard:", onClick);
-
   const handleClick = () => {
     onClick(image);
   };
