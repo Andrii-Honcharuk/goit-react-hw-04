@@ -58,7 +58,7 @@ export default function App() {
       let dims = loadMoreRef.current.getBoundingClientRect();
 
       window.scrollTo({
-        top: -1 * dims.height,
+        top: dims.height,
         behavior: "smooth",
       });
     }
