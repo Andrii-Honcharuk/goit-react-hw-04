@@ -6,9 +6,13 @@ import fetchPhotos from "../../photos-api";
 import SearchBar from "../SearchBar/SearchBar";
 import { ThreeDots } from "react-loader-spinner";
 import "./App.css";
+// import css from "./App.css";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { Toaster } from "react-hot-toast";
 import LoadMore from "../LoadMoreBtn/LoadMoreBtn";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 export default function App() {
   const [photos, setPhotos] = useState([]);
@@ -19,7 +23,11 @@ export default function App() {
   const [error, setError] = useState(false);
   const [noResults, setNoResults] = useState(false);
 
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const loadMoreRef = useRef();
+
+
 
   useEffect(() => {
     if (query === "") {
@@ -30,7 +38,6 @@ export default function App() {
         setIsLoadMore(false);
         setError(false);
         setIsLoading(true);
-        // setPhotos([]);
         const data = await fetchPhotos(query, page);
         setIsLoadMore(data.total_pages > page);
         console.log(data.total_pages > page);
@@ -65,13 +72,26 @@ export default function App() {
     });
   };
 
+  function openModal(imageData) {
+    if (!modalIsOpen) {
+      setSelectedImage(imageData);
+      setIsOpen(true);
+    }
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
     <>
       <SearchBar onSearch={handleSearch} />
 
       <div ref={loadMoreRef}>
         {error && <ErrorMessage />}
-        {photos.length > 0 && <ImageGallery items={photos} />}
+        {photos.length > 0 && (
+          <ImageGallery items={photos} onImageClick={openModal} />
+        )}
         <ThreeDots
           visible={isLoading}
           height="80"
@@ -83,8 +103,32 @@ export default function App() {
           wrapperClass="loader"
         />
         {isLoadMore && !isLoading && <LoadMore onClick={handleLoadMore} />}
-        {noResults && <p>Sorry nothing are found. Try another query</p>}
+        {noResults && (
+          <p className="nothingFound">
+            Sorry nothing are found. Try another query
+          </p>
+        )}
         <Toaster position="top-right" />
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          // style={customStyles}
+          contentLabel="Image Modal"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          {selectedImage && (
+            <>
+              <img
+                src={selectedImage.urls.regular}
+                alt={selectedImage.alt_description}
+              />
+              <button className="modalCloseBtn" onClick={closeModal}>
+                Close
+              </button>
+            </>
+          )}
+        </Modal>
       </div>
     </>
   );

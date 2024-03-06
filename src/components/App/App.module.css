@@ -1,0 +1,11 @@
+.loader {
+  justify-content: center;
+}
+
+.modalCloseBtn {
+  border: none;
+  background-color: initial;
+  position: absolute;
+  right: 32px;
+  top: 32px;
+}
