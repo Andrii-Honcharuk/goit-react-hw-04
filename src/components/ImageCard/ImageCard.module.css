@@ -1,0 +1,16 @@
+.galleryImage {
+  width: 360px;
+  height: 200px;
+  object-fit: fill;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+}
