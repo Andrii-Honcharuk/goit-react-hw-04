@@ -10,6 +10,10 @@
   right: 16px;
   top: 16px;
 }
+.modalCloseBtn:hover,
+.modalCloseBtn:focus {
+  color: rgb(0, 89, 255);
+}
 
 .Modal {
   position: absolute;

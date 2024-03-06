@@ -6,7 +6,6 @@ import fetchPhotos from "../../photos-api";
 import SearchBar from "../SearchBar/SearchBar";
 import { ThreeDots } from "react-loader-spinner";
 import "./App.css";
-// import css from "./App.css";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { Toaster } from "react-hot-toast";
 import LoadMore from "../LoadMoreBtn/LoadMoreBtn";
@@ -38,10 +37,7 @@ export default function App() {
         setIsLoading(true);
         const data = await fetchPhotos(query, page);
         setIsLoadMore(data.total_pages > page);
-        console.log(data.total_pages > page);
-        console.log(page, " of ", data.total_pages);
         setPhotos((prevPhotos) => {
-          console.log("photos");
           return [...prevPhotos, ...data.results];
         });
         data.results.length === 0 ? setNoResults(true) : setNoResults(false);
@@ -60,12 +56,11 @@ export default function App() {
     }
     if (photos.length > 0) {
       let dims = loadMoreRef.current.getBoundingClientRect();
-      console.log("dims", dims);
+
       window.scrollTo({
         top: -1 * dims.height,
         behavior: "smooth",
       });
-      console.log("scroll");
     }
   }, [photos, page]);
 
