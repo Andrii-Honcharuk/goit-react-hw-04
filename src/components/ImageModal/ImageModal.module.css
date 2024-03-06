@@ -1,1 +1,35 @@
- 
+.modalCloseBtn {
+  color: rgb(41, 40, 40, 0.4);
+  border: none;
+  background-color: initial;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+.modalCloseBtn:hover,
+.modalCloseBtn:focus {
+  color: rgb(0, 89, 255);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  max-height: 95vh;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(202, 192, 212, 0.5);
+}
+
+.modalImage {
+  max-height: 95vh;
+}

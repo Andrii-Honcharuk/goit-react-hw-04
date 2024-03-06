@@ -10,6 +10,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { Toaster } from "react-hot-toast";
 import LoadMore from "../LoadMoreBtn/LoadMoreBtn";
 import Modal from "react-modal";
+import ImageModal from "../ImageModal/ImageModal";
 
 Modal.setAppElement("#root");
 
@@ -111,26 +112,11 @@ export default function App() {
           </p>
         )}
         <Toaster position="top-right" />
-        <Modal
+        <ImageModal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          // style={customStyles}
-          contentLabel="Image Modal"
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          {selectedImage && (
-            <>
-              <img
-                src={selectedImage.urls.regular}
-                alt={selectedImage.alt_description}
-              />
-              <button className="modalCloseBtn" onClick={closeModal}>
-                Close
-              </button>
-            </>
-          )}
-        </Modal>
+          selectedImage={selectedImage}
+        />
       </div>
     </>
   );
